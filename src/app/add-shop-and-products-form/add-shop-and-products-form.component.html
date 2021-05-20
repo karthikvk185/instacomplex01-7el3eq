@@ -1,8 +1,8 @@
 <div>
   <div *ngIf="formLoaded" class="container">
-    <form [formGroup]="ClientForm" class=m-3>
+    <form [formGroup]="ClientForm" class=m-3 >
 
-      <div class="row ">
+      <div class="row " >
         <h3>Create your own Shop in 2min for Free!!!</h3>
         <div class="col-md-4 p-1">
           <input formControlName="shopName" class="form-control" type="text" placeholder="Shop Name">
@@ -38,40 +38,39 @@
           <input formControlName="shopLogo" class="form-control" name="uploadfile" type="file">
         </div>
       </div>
-      <div class="btn btn-success" style="margin:1rem" (click)="addProduct()">Add an Item +</div>
+      <div class="btn btn-success btn-sm"  (click)="addProduct()">Add an Item +</div>
       <div id="product" formArrayName="ProductDetails" class="container"
         *ngFor="let Product of ClientForm.get('ProductDetails')['controls']; let i=index;">
-        <h4>Product: {{i+1}}</h4>
+        <h6>Product: {{i+1}}</h6>
         <div [formGroupName]="i">
-          <div class="formGroup" style="margin-bottom:0.5rem">
+          <div class="formGroup">
             
             <input formControlName="productName" class="form-control" type="text" placeholder="Product Name">
           </div>
 
           <div class="formGroup">
-            <input  (change)="fileChange($event,i)" type="file" class='form-control' placeholder="File">
+            <input  (change)="fileChange($event,i)" type="file" class='form-control mt-1' placeholder="File">
             <button *ngIf="i>0" style="margin-top:0.5rem" class='btn btn-danger' (click)="RemoveProduct(i)">
                  Remove
                 </button>
           </div>
-          <div class="formGroup pt-1">
+          <div class="formGroup mt-1">
             <input formControlName="productColor" class="form-control" type="text" placeholder="Product Color">
           </div>
-          <div class="btn btn-primary" style="margin-top:0.5rem" (click)="addProductVariance(i)">Add Variance +</div>
+          <div class="btn btn-outline-primary btn-sm" style="margin-top:0.5rem" (click)="addProductVariance(i)">Add Variance +</div>
           <div formArrayName="ProductVariance"
             *ngFor="let Variance of Product.get('ProductVariance')['controls']; let j=index;">
             <div [formGroupName]="j">
               <div class="btn btn-danger" *ngIf='j>0' style="margin-top:0.5rem" (click)="RemoveVariance(i,j)">Remove
                 Variance</div>
-              <div class="formGroup">
+              <div class="formGroup pt-1">
                 <input formControlName="productPrice" class="form-control" type="text" placeholder="Price">
               </div>
-              <div class="formGroup">
-                <input formControlName="productAvailability" class="form-control" type="text" placeholder="Total Stock Available">
+              <div class="formGroup pt-1">
+                <input formControlName="productAvailability" class="form-control" type="text" placeholder="Available">
               </div>
-              <div class="formGroup">
-                <label>Size</label>:
-                <input formControlName="productSize" class="form-control" type="text">
+              <div class="formGroup pt-1">
+                <input formControlName="productSize" class="form-control" type="text" placeholder="Size">
               </div>
             </div>
           </div>
@@ -80,10 +79,10 @@
         </div>
       </div>
 
-    <div class="btn btn-success m-1" *ngIf="!shopName" (click)="CreateShop()">Submit</div>
-  <div class="btn btn-primary p-1" *ngIf="shopName" (click)="updateShop()">Submit</div>
-    </form>
     
+    </form>
+    <div class="btn btn-success btn-sm m-1" *ngIf="!shopName" (click)="CreateShop()">Submit</div>
+  <div class="btn btn-primary btn-sm p-1" *ngIf="shopName" (click)="updateShop()">Submit</div>
   </div>
   
 
