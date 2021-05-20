@@ -1,0 +1,60 @@
+<h2 style="position:absolute;top:0.5rem;left:30rem;"><i class='fab fa-instagram'></i> {{shopName}}</h2>
+<app-cart *ngIf="Products" [cartValue]='Cart' (cartToView)="fromCart($event)"></app-cart>
+<div class="container">
+  <div *ngIf="Products" class="row">
+    <div *ngFor="let product of Products; let i =index" class="col-sm-3">
+      <br/>
+      <div>
+        <div class="card animate__animated animate__tada">
+          <div [ngClass]="{'outline':Cart[i]}">
+            <img
+          class="card-img-top"
+          src="https://raw.githubusercontent.com/Nandhamaddy007/instacomplex01/master/src/assets/images/images.jpeg"
+          alt="Card image cap"
+        />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{product['productName']}}</h5>
+
+            <label>Size &nbsp;</label>
+            <select style="width:7rem" name='price' id='price' #price>
+            <option *ngFor="let variance of product['ProductVariance'];let j=index" value="{{variance['productSize']}} - Rs.{{variance['productPrice']}}" >
+              {{variance['productSize']}} - Rs.{{variance['productPrice']}}
+            </option>
+          </select>
+            <div class="row">
+              <button class="btn btn-success col-sm-5" style="font-size:0.9rem;" (click)="AddProductToCart(product,i,price.value)" >Add to Cart <i class="fas fa-cart-plus" style="font-size:1.5rem"></i></button>
+
+
+              <input type="number" class="form-control col-sm-5 offset-sm-1" style="width:5rem" *ngIf="Cart[i]" value="1"  id="count" name="count" min="1" #count (change)="changeCount(count.value,i,price.value)">
+
+
+              <span class="btn btn-danger" style="margin-top:1rem;" id="remove" name="remove" *ngIf="Cart[i]" (click)="removeProduct(i,price.value)">Remove <i class="far fa-trash-alt"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="shopName==undefined && allShops">
+    <h1>Main complex</h1>
+    <div class="row">
+      <div *ngFor="let shop of allShops" class="col-sm-3">
+        <a routerLink="{{shop.shopName}}" routerLinkActive="active">
+          <div class="card animate__animated animate__tada">
+            <img
+          src="https://raw.githubusercontent.com/Nandhamaddy007/instacomplex01/master/src/assets/images/images.jpeg"
+          class="card-img-top" alt="...">
+            <div class="card-body">
+              <h4 class="card-title">{{shop['shopName']}}</h4>
+              <h6 class="card-title">{{shop['shopOwner']}}</h6>
+              <h6 class="card-title">{{shop['shopOwnerMobile']}}</h6>
+              <h6 class="card-title">{{shop['shopOwnerAddress']}}</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
